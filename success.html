@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Transfer Successful</title>
+  <style>
+    *{box-sizing:border-box} html,body{height:100%}
+    body{margin:0;background:#fff;color:#1C1C4D;font-family:"Noto Sans",system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+    .wrap{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center}
+    .icon{width:112px;height:112px;border-radius:50%;background:#FF7A00;display:grid;place-items:center;position:relative;box-shadow:0 8px 24px rgba(255,122,0,0.25)}
+    .icon svg{display:block}
+    .confetti{position:absolute;right:-10px;top:-10px;font-size:22px}
+    .title{margin:16px 0 8px;font-weight:800;font-size:22px;color:#FF7A00}
+    .sub{margin:0 0 18px;color:#6b7789;font-size:14px}
+    .chip{display:inline-flex;align-items:center;gap:8px;background:#FFEEE0;color:#FF7A00;border-radius:999px;padding:10px 16px;font-weight:800;margin-bottom:14px}
+    .btn{display:block;width:100%;max-width:420px;background:#FF7A00;color:#fff;border:0;padding:16px;border-radius:14px;font-weight:800;font-size:16px}
+  </style>
+</head>
+<body>
+  <main class="wrap" aria-label="Transfer Successful">
+    <div class="icon" aria-hidden="true">
+      <svg width="52" height="52" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 6L9 17l-5-5" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span class="confetti">🎉</span>
+    </div>
+    <h1 class="title">Transfer Successful!</h1>
+    <p id="msg" class="sub">Your transfer of ₦170,000 has been processed successfully.</p>
+    <div class="chip"><span>🎉</span><span>Success</span></div>
+    <button class="btn" onclick="location.href='dashboard.html'">Back to Dashboard</button>
+  </main>
+  <script>
+    const params = new URLSearchParams(location.search);
+    const amount = Number(params.get('amount') || '170000').toLocaleString('en-NG');
+    document.getElementById('msg').textContent = `Your transfer of ₦${amount} has been processed successfully.`;
+    if (params.get('add') === '1') {
+      const amt = Number(params.get('amount') || '170000');
+      const txns = JSON.parse(localStorage.getItem('emp_txns') || '[]');
+      const id = `TXN${String(txns.length + 1).padStart(3, '0')}`;
+      txns.push({ id, amount: amt, date: Date.now() });
+      localStorage.setItem('emp_txns', JSON.stringify(txns));
+      const u = new URL(location.href); u.searchParams.delete('add'); history.replaceState(null, '', u.toString());
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EASY MOBILE PAY — Account Setup</title>
+  <style>
+    :root{--orange:#FF7A00;--navy:#1C1C4D;--bg:#F8F6FB;--card:#fff}
+    *{box-sizing:border-box} html,body{height:100%}
+    body{margin:0;background:var(--bg);color:#101315;font-family:"Noto Sans",system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+    .wrap{min-height:100vh;display:flex;flex-direction:column}
+    .topbar{height:56px;display:flex;align-items:center;justify-content:center;position:relative;background:#fff;border-bottom:1px solid #eef1f5}
+    .back{position:absolute;left:10px;top:50%;transform:translateY(-50%);background:transparent;border:0;padding:8px}
+    .title{margin:0;font-size:20px;font-weight:800;color:var(--navy)}
+    .content{padding:16px;max-width:560px;margin:0 auto;width:100%}
+    .section{margin-top:12px}
+    .step{background:var(--card);border-radius:16px;box-shadow:0 8px 24px rgba(0,0,0,0.06);padding:14px;display:flex;gap:12px;align-items:flex-start;margin-bottom:12px;border:1px solid #f1f3f6}
+    .icon{flex:0 0 42px;width:42px;height:42px;border-radius:12px;background:#fff3e8;display:grid;place-items:center}
+    .step h3{margin:0;font-size:16px;font-weight:800;color:var(--navy)}
+    .step p{margin:6px 0 0;color:#5b6a7f;font-size:14px;line-height:1.5}
+    .accent{color:var(--orange);font-weight:800}
+    .btn{display:block;width:100%;background:var(--orange);color:#fff;border:0;padding:16px;border-radius:14px;font-weight:800;font-size:16px;margin-top:6px}
+    .note{font-size:12px;color:#6b7789;margin-top:8px;text-align:center}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="topbar">
+      <button class="back" onclick="history.back()" aria-label="Go back">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1C1C4D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <h1 class="title">Account Setup</h1>
+    </header>
+
+    <main class="content" aria-label="Account Setup Steps">
+      <section class="section">
+        <div class="step">
+          <div class="icon" aria-hidden="true">
+            <!-- account icon -->
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FF7A00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="8" r="4"/><path d="M4 20c2-4 6-6 8-6s6 2 8 6"/>
+            </svg>
+          </div>
+          <div>
+            <h3>Step 1 – Create Account</h3>
+            <p>Register or log in to your Easy Mobile Pay account.<br/>Make sure your details are correct.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="icon" aria-hidden="true">
+            <!-- mining icon -->
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1C1C4D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 11l9-7 9 7-9 7-9-7z"/><path d="M12 4v14"/>
+            </svg>
+          </div>
+          <div>
+            <h3>Step 2 – Start Mining ₦170,000</h3>
+            <p>Tap the <span class="accent">Start Mining</span> button to begin.<br/>Each click increases your balance by ₦34,000.<br/>After five clicks, your total balance becomes ₦170,000.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="icon" aria-hidden="true">
+            <!-- payment icon -->
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FF7A00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="5" width="20" height="14" rx="2"/><path d="M6 12h6"/>
+            </svg>
+          </div>
+          <div>
+            <h3>Step 3 – Purchase Activation Code</h3>
+            <p>Pay ₦6,500 inside the app to purchase your activation code.<br/>After payment, you’ll receive a message containing your EMP Code.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="icon" aria-hidden="true">
+            <!-- code icon -->
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1C1C4D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M8 9l-4 3 4 3M16 9l4 3-4 3"/><rect x="9" y="7" width="6" height="10" rx="2"/>
+            </svg>
+          </div>
+          <div>
+            <h3>Step 4 – Input EMP Code</h3>
+            <p>Enter your EMP code in the field provided.<br/>Once verified, your withdrawal button will be activated.</p>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="icon" aria-hidden="true">
+            <!-- withdraw icon -->
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FF7A00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><rect x="3" y="18" width="18" height="3" rx="1" fill="#FF7A00" opacity=".15"/>
+            </svg>
+          </div>
+          <div style="flex:1">
+            <h3>Step 5 – Withdraw Earnings</h3>
+            <p>Click <span class="accent">Withdraw Now</span> to send ₦170,000 to your linked wallet or bank.</p>
+            <button class="btn" type="button">Withdraw Now</button>
+            <p class="note">Make sure you input your correct EMP code before withdrawal.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

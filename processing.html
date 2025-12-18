@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Processing Transfer</title>
+  <style>
+    *{box-sizing:border-box} html,body{height:100%}
+    body{margin:0;background:#fff;color:#1C1C4D;font-family:"Noto Sans",system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+    .wrap{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px}
+    .spinner{width:72px;height:72px;border:6px solid rgba(255,122,0,0.25);border-top-color:#FF7A00;border-radius:50%;animation:spin 1s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .title{margin:18px 0 8px;font-weight:800;font-size:20px;color:#1C1C4D;text-align:center}
+    .sub{margin:0 0 12px;color:#6b7789;font-size:14px;text-align:center}
+    .count{font-weight:800;font-size:24px;color:#6A0DAD;margin-top:8px}
+  </style>
+</head>
+<body>
+  <main class="wrap" aria-label="Processing Transfer">
+    <div class="spinner" aria-hidden="true"></div>
+    <h1 class="title">Processing Transfer...</h1>
+    <p class="sub">Please wait while we process your request.</p>
+    <div id="count" class="count">10</div>
+  </main>
+  <script>
+    const params = new URLSearchParams(location.search);
+    const amount = params.get('amount') || '170000';
+    let n = 10; const el = document.getElementById('count');
+    const tick = setInterval(() => {
+      n--; el.textContent = n;
+      if (n <= 0) { clearInterval(tick); location.href = 'success.html?amount=' + amount + '&add=1'; }
+    }, 1000);
+  </script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Payment Verification</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#f7f8fa;--orange1:#FFA500;--orange2:#FF6B00;--dark:#111;--muted:#6b7789}
+    *{box-sizing:border-box} html,body{height:100%}
+    body{margin:0;background:var(--bg);color:var(--dark);font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;opacity:0;transition:opacity .4s ease}
+    body.ready{opacity:1}
+    .wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+    .panel{width:100%;max-width:520px;text-align:center}
+    .loader{
+      width:96px;height:96px;margin:0 auto 16px;border-radius:50%;
+      background:conic-gradient(from 0deg, var(--orange1), var(--orange2));
+      -webkit-mask: radial-gradient(circle 38px, transparent 40px, #000 41px);
+              mask: radial-gradient(circle 38px, transparent 40px, #000 41px);
+      animation:spin 1.2s linear infinite;
+      filter: drop-shadow(0 8px 22px rgba(255,123,0,.25));
+    }
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .title{font-weight:800;font-size:22px;margin:8px 0 6px}
+    .sub{margin:0;color:var(--muted)}
+    .bar{height:4px;background:#222;border-radius:999px;overflow:hidden;margin:18px auto 10px;max-width:420px}
+    .bar span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--orange1),var(--orange2));animation:load 7s linear forwards}
+    @keyframes load{to{width:100%}}
+    .hint{color:#8a8f99;font-size:13px;margin:8px 0 0}
+    .footer{position:fixed;left:0;right:0;bottom:12px;text-align:center;font-weight:800;color:#333}
+    .chat{position:fixed;right:16px;bottom:20px;width:56px;height:56px;border-radius:50%;background:linear-gradient(180deg,var(--orange1),var(--orange2));color:#fff;border:0;display:grid;place-items:center;box-shadow:0 10px 24px rgba(255,122,0,.35)}
+    .tip{position:fixed;right:16px;bottom:84px;background:#111;color:#fff;font-size:13px;padding:8px 10px;border-radius:10px;opacity:0;transform:translateY(6px);transition:.2s;pointer-events:none}
+    .tip.show{opacity:1;transform:translateY(0)}
+    .fadeout{animation:fade .5s ease forwards}
+    @keyframes fade{to{opacity:0}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <main class="panel" aria-label="Payment Verification">
+      <div class="loader" aria-hidden="true"></div>
+      <h1 class="title">Confirming Your Payment</h1>
+      <p class="sub">Please wait while we verify your transaction…</p>
+      <div class="bar" aria-hidden="true"><span></span></div>
+      <p class="hint">This may take a few moments</p>
+      <p class="hint">Please do not close this page</p>
+    </main>
+  </div>
+
+  <div class="footer">Easy mobile pay  LTD</div>
+
+  <button class="chat" aria-label="Chat">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff" xmlns="http://www.w3.org/2000/svg"><path d="M21 15a4 4 0 01-4 4H7l-4 3V6a4 4 0 014-4h10a4 4 0 014 4v9z" fill-opacity=".2"/><path d="M7 8h10M7 12h7" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+  </button>
+  <div id="tip" class="tip">Need help?</div>
+
+  <script>
+    document.body.classList.add('ready');
+    // Chat tooltip
+    const chat = document.querySelector('.chat'); const tip = document.getElementById('tip');
+    chat.addEventListener('click', ()=>{ tip.classList.add('show'); setTimeout(()=>tip.classList.remove('show'), 1500); });
+    // Auto-advance after ~7s with fade
+    setTimeout(()=>{ document.body.classList.add('fadeout'); setTimeout(()=>location.href='payment-confirmation.html', 500); }, 7000);
+  </script>
+</body>
+</html>

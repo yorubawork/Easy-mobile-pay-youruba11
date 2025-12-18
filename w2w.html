@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Wallet to Wallet Transfer</title>
+  <style>
+    :root{--orange:#FF7A00;--navy:#1C1C4D;--bg:#F8F6FB;--card:#fff;--line:#e6e9ef}
+    *{box-sizing:border-box} html,body{height:100%}
+    body{margin:0;background:var(--bg);color:var(--navy);font-family:"Noto Sans",system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+    .wrap{min-height:100vh;display:flex;flex-direction:column}
+    .topbar{height:56px;display:flex;align-items:center;justify-content:center;position:relative;background:#ECEFF3}
+    .back{position:absolute;left:10px;top:50%;transform:translateY(-50%);background:transparent;border:0;padding:8px}
+    .title{margin:0;font-size:18px;font-weight:800;color:var(--navy)}
+    .content{padding:16px;max-width:560px;margin:0 auto;width:100%}
+    .card{background:var(--card);border-radius:18px;box-shadow:0 8px 24px rgba(0,0,0,0.06);padding:16px}
+    .balance-row{display:flex;justify-content:center;align-items:center;gap:8px}
+    .balance{font-size:18px;font-weight:800;text-align:center}
+    .eye{background:transparent;border:0;padding:6px;cursor:pointer}
+    .form{margin-top:16px;display:flex;flex-direction:column;gap:12px}
+    .field{background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,0.04);padding:12px}
+    .label{display:block;font-size:12px;color:#5b6a7f;margin-bottom:6px}
+    .input{width:100%;border:0;outline:0;background:transparent;font-size:16px;color:var(--navy)}
+    .btn{display:block;width:100%;background:var(--orange);color:#fff;border:0;padding:16px;border-radius:14px;font-weight:800;font-size:16px;margin-top:8px}
+    .info{font-size:12px;color:#6b7789;margin-top:8px;text-align:center}
+    .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);display:none;place-items:center;z-index:1000}
+    .modal{background:#fff;border-radius:16px;max-width:520px;margin:0 16px;padding:18px 16px;box-shadow:0 10px 30px rgba(0,0,0,0.2);border:1px solid #ffe1c5}
+    .modal-head{display:flex;align-items:center;gap:8px;color:#FF7A00;font-weight:800;font-size:18px;margin-bottom:8px}
+    .modal p{color:#1C1C4D;font-size:14px;line-height:1.5;margin:8px 0}
+    .modal-footer{display:flex;justify-content:flex-end;margin-top:12px}
+    .link-buy{background:none;border:0;color:#FF7A00;font-weight:800;cursor:pointer}
+    .overlay-loading{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;place-items:center;z-index:1100}
+    .spinner{width:48px;height:48px;border:4px solid rgba(255,122,0,0.25);border-top-color:#FF7A00;border-radius:50%;animation:spin 1s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="topbar">
+      <button class="back" onclick="history.back()" aria-label="Go back">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1C1C4D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <h1 class="title">Wallet to Wallet Transfer</h1>
+    </header>
+
+    <main class="content" aria-label="W2W transfer">
+      <section class="card">
+        <div class="balance-row">
+          <span id="balanceText" class="balance">Available Balance: ₦170,000</span>
+          <button id="toggleEye" class="eye" aria-label="Show/Hide balance">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3b4654" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+          </button>
+        </div>
+      </section>
+
+      <form class="form" action="#" method="post" novalidate>
+        <div class="field">
+          <label class="label" for="rid">Recipient Wallet ID or Phone Number</label>
+          <input id="rid" class="input" type="text" placeholder="e.g. 08012345678 or WALT1234" required />
+        </div>
+        <div class="field">
+          <label class="label" for="amt">Amount to Transfer</label>
+          <input id="amt" class="input" type="number" min="0" step="0.01" placeholder="Enter amount" required />
+        </div>
+        <div class="field">
+          <label class="label" for="emp">Input EMP Code</label>
+          <input id="emp" class="input" type="text" placeholder="Enter EMP code" required />
+        </div>
+        <button id="sendBtn" class="btn" type="submit">Send Money</button>
+        <p class="info">Please confirm the wallet ID and EMP code before sending money.</p>
+      </form>
+    </main>
+  </div>
+
+  <div id="modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal">
+      <div class="modal-head">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <rect x="2" y="5" width="20" height="14" rx="2" fill="#26C281"/><path d="M6 12h6" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span id="modalTitle">Activation Pin</span>
+      </div>
+      <p>Purchase EMP code to continue this transfer.</p>
+      <div class="modal-footer">
+        <button id="goBuy" class="link-buy">BUY EMP CODE</button>
+      </div>
+    </div>
+  </div>
+  <div id="loading" class="overlay-loading" aria-label="Loading"><div class="spinner" aria-hidden="true"></div></div>
+
+  <script>
+    // Balance show/hide
+    let balance = 170000, masked = false;
+    const balanceText = document.getElementById('balanceText');
+    const toggleEye = document.getElementById('toggleEye');
+    function formatNaira(n){ return '₦' + n.toLocaleString('en-NG'); }
+    function renderBalance(){ balanceText.textContent = 'Available Balance: ' + (masked ? '******' : formatNaira(balance)); }
+    renderBalance();
+    toggleEye.addEventListener('click', ()=>{ masked = !masked; renderBalance(); });
+
+    // Send -> show purchase EMP modal
+    document.getElementById('sendBtn').addEventListener('click', (e)=>{
+      e.preventDefault();
+      document.getElementById('modal').style.display='grid';
+    });
+    // Buy EMP flow with 5s loading, then navigate
+    document.getElementById('goBuy').addEventListener('click', ()=>{
+      document.getElementById('modal').style.display='none';
+      const loader = document.getElementById('loading');
+      loader.style.display='grid';
+      setTimeout(()=>{ window.location.href='buy-emp.html'; }, 5000);
+    });
+  </script>
+</body>
+</html>

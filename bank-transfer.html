@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bank Transfer</title>
+  <style>
+    :root{--orange:#FF7A00;--red:#D32F2F;--navy:#1C1C4D;--line:#e8edf3}
+    *{box-sizing:border-box} html,body{height:100%}
+    body{margin:0;background:#fff;color:#101315;font-family:"Noto Sans",system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+    .wrap{min-height:100vh;display:flex;flex-direction:column}
+    .topbar{height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 12px;background:#D32F2F;color:#fff}
+    .topbar .title{font-weight:800}
+    .cancel{color:#fff;text-decoration:none;font-weight:700}
+    .content{flex:1;padding:16px;max-width:560px;margin:0 auto;width:100%}
+    .center{display:flex;flex-direction:column;align-items:center;text-align:center;margin-top:8px}
+    .logo{width:84px;height:84px;border-radius:50%;background:#f7f7f7;display:grid;place-items:center;box-shadow:0 6px 16px rgba(0,0,0,0.06);margin-bottom:12px}
+    .amount{font-size:20px;font-weight:800;color:#1C1C4D;margin:6px 0}
+    .email{color:#6b7789;font-size:14px;margin-bottom:8px}
+    .note{color:#6b7789;font-size:13px;margin-top:6px}
+    .card{background:#FFF4EA;border:1px solid #FFE1C5;border-radius:16px;padding:14px;margin-top:14px;box-shadow:0 8px 24px rgba(0,0,0,0.04)}
+    .row{display:flex;justify-content:space-between;align-items:center;padding:10px 8px;border-bottom:1px solid rgba(0,0,0,0.06)}
+    .row:last-child{border-bottom:none}
+    .label{font-size:13px;color:#5b6a7f}
+    .value{font-weight:800;color:#1C1C4D}
+    .copy{background:var(--orange);color:#fff;border:0;padding:8px 12px;border-radius:10px;font-weight:800}
+    .btn{display:block;width:100%;background:var(--orange);color:#fff;border:0;padding:16px;border-radius:14px;font-weight:800;font-size:16px;margin-top:18px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="topbar">
+      <span class="title">Bank Transfer</span>
+      <a class="cancel" href="buy-emp.html">Cancel</a>
+    </header>
+
+    <main class="content" aria-label="Bank Transfer Instruction">
+      <div class="center">
+        <div class="logo" aria-hidden="true">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#1C1C4D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="9"/><path d="M4 10h16M4 14h16"/>
+          </svg>
+        </div>
+        <div class="amount">NGN 6,500</div>
+        <div id="email" class="email">with the email address register with —</div>
+        <div class="note">Proceed to your bank app to complete this Transfer</div>
+      </div>
+
+      <section class="card" aria-label="Payment details">
+        <div class="row">
+          <div><div class="label">Amount</div><div class="value" id="val-amt">NGN 6,500</div></div>
+          <button class="copy" data-copy="6500">Copy</button>
+        </div>
+        <div class="row">
+          <div><div class="label">Account Number</div><div class="value" id="val-acct">2081431236</div></div>
+          <button class="copy" data-copy="2081431236">Copy</button>
+        </div>
+        <div class="row">
+          <div><div class="label">Bank Name</div><div class="value">KUDA</div></div>
+          <button class="copy" data-copy="KUDA">Copy</button>
+        </div>
+        <div class="row">
+          <div><div class="label">Account Name</div><div class="value">Paygo-USMAN NURUDEEN</div></div>
+          <button class="copy" data-copy="Paygo-USMAN NURUDEEN">Copy</button>
+        </div>
+      </section>
+
+      <p class="note">Make payment to the account above to get your EMP CODE and don't use Opay bank for payment.</p>
+
+      <button class="btn" type="button">I have made this bank transfer</button>
+    </main>
+  </div>
+
+  <script>
+    // Show registered email
+    const params = new URLSearchParams(location.search);
+    const email = params.get('email') || localStorage.getItem('emp_email') || 'your@email.com';
+    document.getElementById('email').textContent = 'with the email address register with — ' + email;
+
+    // Copy handlers
+    document.querySelectorAll('.copy').forEach(btn=>{
+      btn.addEventListener('click', async ()=>{
+        try { await navigator.clipboard.writeText(btn.dataset.copy); btn.textContent='Copied'; setTimeout(()=>btn.textContent='Copy', 1200); }
+        catch(e){ alert('Copy failed'); }
+      });
+    });
+
+    // Confirmation (navigate to verification page)
+    document.querySelector('.btn').addEventListener('click', ()=>{ window.location.href='payment-verify.html'; });
+  </script>
+</body>
+</html>

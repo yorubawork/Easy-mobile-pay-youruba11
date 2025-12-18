@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EASY MOBILE PAY — Orders</title>
+  <style>
+    :root{--orange:#FF7A00;--navy:#1C1C4D;--bg:#F8F6FB;--card:#fff;--note:#FFF3E0}
+    *{box-sizing:border-box} html,body{height:100%}
+    body{margin:0;background:var(--bg);color:var(--navy);font-family:"Noto Sans",system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+    .wrap{min-height:100vh;display:flex;flex-direction:column}
+    .topbar{height:56px;display:flex;align-items:center;justify-content:center;position:relative;background:#ECEFF3}
+    .back{position:absolute;left:10px;top:50%;transform:translateY(-50%);background:transparent;border:0;padding:8px}
+    .title{margin:0;font-size:18px;font-weight:800;color:var(--navy)}
+    .content{padding:16px;max-width:560px;margin:0 auto;width:100%}
+    .card{background:var(--card);border-radius:16px;box-shadow:0 8px 24px rgba(0,0,0,0.06);padding:16px;border:1px solid #f1f3f6}
+    .card h2{margin:0 0 8px;font-size:16px;font-weight:800;color:var(--navy)}
+    .card p{margin:0;color:#5b6a7f;font-size:14px}
+    .note{background:var(--note);border:1px solid #FFE1C5;border-radius:16px;padding:14px;display:flex;gap:10px;align-items:flex-start;margin-top:14px;box-shadow:0 8px 24px rgba(0,0,0,0.04)}
+    .note .icon{flex:0 0 24px}
+    .note strong{display:block;margin-bottom:6px}
+    .btn{display:block;width:100%;background:var(--orange);color:#fff;border:0;padding:16px;border-radius:14px;font-weight:800;font-size:16px;margin-top:16px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="topbar" aria-label="Header">
+      <button class="back" onclick="history.back()" aria-label="Go back">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1C1C4D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <h1 class="title">Orders</h1>
+    </header>
+
+    <main class="content" aria-label="Orders content">
+      <section class="card" aria-label="My Orders">
+        <h2>My Orders</h2>
+        <p>View your activation code purchase details here.</p>
+      </section>
+
+      <section class="note" aria-label="Important note">
+        <div class="icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF7A00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><path d="M12 8v.01"/><path d="M12 12v4"/>
+          </svg>
+        </div>
+        <div>
+          <strong>Note:</strong>
+          <p style="margin:0;color:#1C1C4D;font-size:14px;line-height:1.55">
+            “EASY MOBILE PAY is built to help our users achieve their financial goals safely and successfully.<br/>
+            Please avoid anyone who claims they can sell you an activation code outside the app.<br/>
+            All activation codes are generated and sold only through this platform.<br/>
+            Stay safe and always purchase directly within the app.”
+          </p>
+        </div>
+      </section>
+
+      <button class="btn" type="button">View My Orders</button>
+    </main>
+  </div>
+</body>
+</html>
+

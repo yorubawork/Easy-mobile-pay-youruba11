@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chat Us — EASY MOBILE PAY</title>
+  <style>
+    :root{--orange:#FF7A00;--navy:#1C1C4D;--line:#e6e9ef}
+    *{box-sizing:border-box} html,body{height:100%}
+    body{margin:0;background:#fff;color:#101315;font-family:"Noto Sans",system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+    .wrap{min-height:100vh;display:flex;flex-direction:column}
+    .topbar{height:56px;display:flex;align-items:center;justify-content:center;position:relative;border-bottom:1px solid #f3f5f8;background:#fff}
+    .back{position:absolute;left:10px;top:50%;transform:translateY(-50%);background:transparent;border:0;padding:8px}
+    .title{margin:0;font-size:18px;font-weight:800;color:#1b2a4a}
+    .content{padding:16px;max-width:560px;margin:0 auto;width:100%}
+    .card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px;box-shadow:0 8px 24px rgba(0,0,0,0.04);display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+    .row{display:flex;align-items:center;gap:10px}
+    .label{font-weight:800;color:#1b2a4a}
+    .sub{font-size:12px;color:#6b7789}
+    .btn{background:var(--orange);color:#fff;border:0;padding:10px 14px;border-radius:12px;font-weight:800}
+    a.btn{text-decoration:none;display:inline-block}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="topbar" aria-label="Header">
+      <button class="back" onclick="history.back()" aria-label="Go back">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1b2a4a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <h1 class="title">Chat Us</h1>
+    </header>
+
+    <main class="content" aria-label="Contact options">
+      <div class="card">
+        <div class="row">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="#1C1C4D" aria-hidden="true"><circle cx="12" cy="12" r="10" fill-opacity=".1"/><path d="M8 12l4-4 4 4-4 4-4-4z" fill="#1C1C4D"/></svg>
+          <div>
+            <div class="label">Chat us on Telegram</div>
+            <div class="sub">t.me/Easymobilepay</div>
+          </div>
+        </div>
+        <a class="btn" href="https://t.me/Easymobilepay" target="_blank" rel="noopener">Open</a>
+      </div>
+
+      <div class="card">
+        <div class="row">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="#1C1C4D" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" fill-opacity=".1"/><path d="M3 7l9 6 9-6" stroke="#1C1C4D" stroke-width="2" fill="none"/></svg>
+          <div>
+            <div class="label">Chat us on Gmail</div>
+            <div class="sub">easymonipay@gmail.com</div>
+          </div>
+        </div>
+        <a class="btn" href="mailto:easymonipay@gmail.com">Email</a>
+      </div>
+
+      <div class="card">
+        <div class="row">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="#1C1C4D" aria-hidden="true"><circle cx="12" cy="12" r="10" fill-opacity=".1"/><path d="M7 12h10M9 9l-2-2m8 8l2 2" stroke="#1C1C4D" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div>
+            <div class="label">Join our WhatsApp group</div>
+            <div class="sub">Tap to join the group</div>
+          </div>
+        </div>
+        <a class="btn" href="https://chat.whatsapp.com/EiCPecoSpcg4yc3DMW1Ooq?mode=ems_copy_t" target="_blank" rel="noopener">Join</a>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

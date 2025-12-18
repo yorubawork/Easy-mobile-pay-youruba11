@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Easy Mobile Pay — Signup</title>
+  <style>
+    :root { --navy:#1C1C4D; --line:#d9dee5; --orange:#FF7A00; }
+    * { box-sizing: border-box; }
+    html, body { height:100%; }
+    body {
+      margin:0; background:#fff; color:var(--navy);
+      font-family:"Noto Sans", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    }
+    .wrap { min-height:100vh; display:flex; flex-direction:column; }
+    .topbar { height:52px; display:flex; align-items:center; justify-content:flex-end; padding:0 16px; }
+    .help { color:var(--orange); text-decoration:none; font-weight:600; font-size:14px; }
+
+    .sheet {
+      margin-top:auto; background:#fff; border-top-left-radius:24px; border-top-right-radius:24px;
+      box-shadow:0 -8px 24px rgba(0,0,0,0.06); padding:20px 16px 28px; position:relative;
+    }
+    .grab { width:44px; height:4px; background:#e9edf3; border-radius:4px; margin:0 auto 10px; }
+
+    .icon-wrap { position:relative; width:88px; height:88px; margin:4px auto 8px; }
+    .icon-wrap svg { display:block; }
+    .check { position:absolute; right:-2px; bottom:-2px; }
+
+    .title { text-align:center; font-weight:800; font-size:20px; letter-spacing:0.6px; margin:8px 0 6px; color:var(--navy); }
+
+    .grid {
+      display:grid; grid-template-columns:1fr 1fr; gap:14px 12px; margin-top:12px;
+    }
+    .field { display:flex; flex-direction:column; }
+    .label { font-size:12px; letter-spacing:0.4px; margin-bottom:6px; opacity:0.9; }
+    .control { border-bottom:1px solid var(--line); display:flex; align-items:center; }
+    .input {
+      border:0; outline:0; background:transparent; padding:12px 0; width:100%; font-size:16px; color:var(--navy);
+    }
+    .full { grid-column:1 / -1; }
+
+    .toggle { background:transparent; border:0; padding:6px; margin-left:6px; cursor:pointer; }
+
+    .btn {
+      display:block; width:100%; background:var(--orange); color:#fff; border:0; padding:16px; border-radius:14px;
+      font-weight:800; font-size:16px; margin-top:18px;
+    }
+
+    .toast{position:fixed;left:50%;bottom:8%;transform:translateX(-50%);background:#1C1C4D;color:#fff;padding:12px 16px;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,0.2);font-weight:700;}
+    .overlay{position:fixed;inset:0;display:grid;place-items:center;background:rgba(0,0,0,0.6);z-index:9999;}
+    .spinner{width:48px;height:48px;border:4px solid rgba(255,255,255,0.25);border-top-color:#fff;border-radius:50%;animation:spin 1s linear infinite;}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .hidden{display:none}
+
+    @media (min-width:480px){
+      .sheet { padding:28px 22px 32px; max-width:520px; margin-inline:auto; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <a href="#" class="help">Need Help?</a>
+    </div>
+
+    <section class="sheet" aria-label="Account Signup">
+      <div class="grab" aria-hidden="true"></div>
+
+      <div class="icon-wrap" aria-hidden="true">
+        <!-- User icon -->
+        <svg width="88" height="88" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="User icon">
+          <circle cx="48" cy="48" r="48" fill="#eaf2ff"/>
+          <circle cx="48" cy="38" r="16" fill="#1F4AA8"/>
+          <path d="M20 78c6-14 18-20 28-20s22 6 28 20" fill="#1F4AA8"/>
+        </svg>
+        <!-- Check -->
+        <svg class="check" width="26" height="26" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle cx="12" cy="12" r="12" fill="#26C281"/>
+          <path d="M7 12.5l3 3 7-7" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <h1 class="title">ACCOUNT SIGNUP</h1>
+
+      <form action="#" method="post" novalidate>
+        <div class="grid">
+          <div class="field">
+            <span class="label">FIRSTNAME</span>
+            <div class="control">
+              <input class="input" type="text" name="first_name" placeholder="Your first name" autocomplete="given-name" required />
+            </div>
+          </div>
+          <div class="field">
+            <span class="label">LASTNAME</span>
+            <div class="control">
+              <input class="input" type="text" name="last_name" placeholder="Your last name" autocomplete="family-name" required />
+            </div>
+          </div>
+
+          <div class="field">
+            <span class="label">EMAIL ADDRESS</span>
+            <div class="control">
+              <input class="input" type="email" name="email" placeholder="you@example.com" autocomplete="email" required />
+            </div>
+          </div>
+          <div class="field">
+            <span class="label">MOBILE NUMBER</span>
+            <div class="control">
+              <input class="input" type="tel" name="phone" placeholder="+1 555 000 1234" autocomplete="tel" required />
+            </div>
+          </div>
+
+          <div class="field full">
+            <span class="label">CREATE PASSWORD</span>
+            <div class="control">
+              <input id="password" class="input" type="password" name="password" placeholder="Create a strong password" autocomplete="new-password" required />
+              <button type="button" class="toggle" aria-label="Toggle password visibility" aria-pressed="false">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3b4654" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/>
+                  <circle cx="12" cy="12" r="3"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn" type="submit">Register</button>
+      </form>
+    </section>
+  </div>
+
+  <div id="toast" class="toast hidden" role="alert">Registered successfully</div>
+  <div id="overlay" class="overlay hidden" aria-label="Loading"><div class="spinner" aria-hidden="true"></div></div>
+
+  <script>
+    // Toggle password visibility
+    const toggle = document.querySelector('.toggle');
+    const pwd = document.getElementById('password');
+    toggle.addEventListener('click', () => {
+      const visible = pwd.type === 'text';
+      pwd.type = visible ? 'password' : 'text';
+      toggle.setAttribute('aria-pressed', String(!visible));
+    });
+
+    // Handle signup submit -> toast -> loading 6s -> redirect with name
+    const form = document.querySelector('form');
+    const toast = document.getElementById('toast');
+    const overlay = document.getElementById('overlay');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const first = form.querySelector('[name="first_name"]').value.trim();
+      const last = form.querySelector('[name="last_name"]').value.trim();
+      const email = form.querySelector('[name="email"]').value.trim();
+      const fullName = [first, last].filter(Boolean).join(' ');
+      localStorage.setItem('emp_name', fullName || 'User');
+      localStorage.setItem('emp_email', email || '');
+      const phone = form.querySelector('[name="phone"]').value.trim();
+      const password = form.querySelector('[name="password"]').value;
+      localStorage.setItem('emp_phone', phone || '');
+      localStorage.setItem('emp_password', password || '');
+      toast.classList.remove('hidden');
+      setTimeout(() => {
+        toast.classList.add('hidden');
+        overlay.classList.remove('hidden');
+        setTimeout(() => {
+          const q = new URLSearchParams({ name: fullName || 'User' }).toString();
+          window.location.href = 'dashboard.html?' + q;
+        }, 6000);
+      }, 1500);
+    });
+  </script>
+</body>
+</html>

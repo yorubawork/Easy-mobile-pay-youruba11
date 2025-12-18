@@ -1,0 +1,40 @@
+:root { --bg: #fff; --fg: #111; }
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: "Noto Sans", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+}
+
+body.loading, .loading-screen { background: #000; }
+.loading-screen { position: fixed; inset: 0; display: grid; place-items: center; }
+.spinner { width: 48px; height: 48px; border: 4px solid rgba(255,255,255,0.25); border-top-color: #fff; border-radius: 50%; animation: spin 1s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.frame {
+  /* override to fill screen */
+  position: fixed; inset: 0; overflow: hidden; padding: 0;
+}
+
+.photo {
+  width: 100vw; height: 100vh; object-fit: cover;
+}
+
+.welcome { background: #E8FBF3; color: #111; }
+.welcome-screen { position: relative; min-height: 100vh; padding: 24px; overflow: hidden; }
+.bg-waves::before, .bg-waves::after { content:""; position:absolute; inset:auto -20% -20% -20%; height:60vh; background:#fff; border-radius:1000px; transform:rotate(-20deg); opacity:0.25; }
+.bg-waves::after { inset:-30% -25% auto -25%; height:50vh; opacity:0.15; }
+
+.brand { display:flex; align-items:center; gap:12px; }
+.logo { background:#fff; color:#1F2251; font-weight:700; padding:10px 12px; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.08); font-family:"Noto Sans", system-ui, sans-serif; }
+.logo img { display:block; height:28px; width:auto; }
+.app-title { margin:28px 0 12px; font-size:28px; line-height:1.2; color:#1F2251; }
+.welcome-text { font-size:16px; line-height:1.6; color:#18304A; margin-bottom:32px; }
+
+.cta { display:block; width:100%; max-width:520px; margin:40px auto 12px; background:#FF7A00; color:#fff; text-align:center; padding:16px 20px; border-radius:14px; font-weight:700; text-decoration:none; box-shadow:0 6px 18px rgba(255,122,0,0.25); }
+.cta:active { transform:scale(0.98); }
+@media (min-width:480px){ .app-title{font-size:32px;} .welcome-text{font-size:17px;} }
+
+.hidden { display: none; }
